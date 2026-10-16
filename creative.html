@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <script>
+    (function () {
+      var theme = 'dark';
+      try {
+        var savedTheme = localStorage.getItem('musab-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') theme = savedTheme;
+      } catch (error) {}
+      document.documentElement.dataset.theme = theme;
+    }());
+  </script>
+  <title>Creative | Mus'ab Anas</title>
+  <meta name="description" content="Video editing, posters, graphic design and 3D work by Mus'ab Anas, including promo, social media and event videos and MDEC design materials for Goolee.">
+  <meta name="author" content="Mus'ab Anas">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Creative | Mus'ab Anas">
+  <meta property="og:description" content="Video editing, posters, graphic design and 3D work by Mus'ab Anas.">
+  <meta property="og:image" content="assets/multimedia/video/mara-vr-launch.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/creative.css">
+</head>
+<body class="page-shell page-creative">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Mus'ab Anas home"><span class="brand-symbol" aria-hidden="true"></span><strong>Mus'ab Anas</strong><span>Unity Game Developer</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="games.html">Games</a>
+        <a class="nav-link" href="creative.html" aria-current="page">Creative</a>
+        <a class="nav-link" href="leadership.html">Leadership</a>
+        <a class="nav-link" href="career.html">Career</a>
+        <a class="nav-link nav-contact" href="index.html#contact">Contact</a>
+        <a class="nav-link nav-cv" href="assets/resume/Musab-Anas-Resume.pdf" target="_blank" rel="noreferrer">View CV <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="true"><span aria-hidden="true"></span></button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="creative-title">
+      <div class="container page-hero-grid">
+        <div class="page-hero-main">
+          <p class="page-kicker label">Poster wall</p>
+          <h1 id="creative-title" class="page-title display creative-title">Creative<span>Video. Posters. Design.</span></h1>
+          <p class="page-lead">Unity is the core. Multimedia production extends how I bring ideas to life: promo, social media and event videos, posters and visuals, 3D models and presentation materials.</p>
+          <ul class="creative-tags" aria-label="Creative tools"><li>CapCut</li><li>Photoshop</li><li>Illustrator</li><li>Canva</li><li>Blender</li></ul>
+          <div class="page-actions">
+            <a class="btn btn-outline" href="#video-work">Watch video work <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="experience.html?id=multimedia-creative-production">Multimedia &amp; creative production <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <figure class="poster-collage" aria-hidden="true">
+          <img src="assets/multimedia/design/appsgoolee-brochure-1-thumb.webp" alt="" width="640" height="905" onerror="this.hidden=true">
+          <img src="assets/multimedia/design/appsgoolee-brochure-3-thumb.webp" alt="" width="640" height="905" onerror="this.hidden=true">
+          <img src="assets/multimedia/design/goolee-bunting-thumb.webp" alt="" width="640" height="1271" onerror="this.hidden=true">
+        </figure>
+      </div>
+    </section>
+
+    <section id="multimedia" class="section" aria-labelledby="multimedia-title">
+      <span id="practice" class="anchor-alias" aria-hidden="true"></span>
+      <div class="container">
+        <div class="section-head">
+          <h2 id="multimedia-title" class="display">Multimedia and<br>visual design</h2>
+          <div class="section-head-side"><p class="section-lead">The creative side of my work, alongside Unity development.</p></div>
+        </div>
+        <ul class="sticker-grid">
+          <li class="sticker"><h3>Video editing</h3><p>Promo videos, social media content and event videos, edited in CapCut.</p></li>
+          <li class="sticker"><h3>Posters &amp; graphic design</h3><p>Posters and visuals for events, games and products, social media, and client branding, made with Photoshop, Illustrator and Canva.</p></li>
+          <li class="sticker"><h3>3D modeling</h3><p>3D modeling and asset production in Blender.</p></li>
+          <li class="sticker"><h3>Presentation &amp; product materials</h3><p>Graphics, presentations and commercialization materials that support products, demonstrations and stakeholder communication.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="video-title">
+      <div class="container">
+        <div id="video-work" class="video-block" hidden>
+          <div class="video-head">
+            <h2 id="video-title" class="sub-title">Video work</h2>
+            <p class="label" id="video-credit"></p>
+          </div>
+          <div id="video-gallery" class="video-gallery"></div>
+          <a id="video-more" class="text-link" href="#" target="_blank" rel="noopener noreferrer" hidden></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="design-title">
+      <div class="container">
+        <div id="design-work" class="video-block design-block" hidden>
+          <div class="video-head">
+            <h2 id="design-title" class="sub-title">Design work</h2>
+            <p class="label" id="design-credit"></p>
+          </div>
+          <div id="design-gallery" class="design-gallery"></div>
+        </div>
+        <div class="practice-block split creative-split">
+          <div class="split-side"><h3 class="sub-title">Creative work, backed by technical delivery.</h3></div>
+          <div class="split-main practice-grid">
+            <article class="practice-card"><h4>Product development</h4><p>Concept development, rapid prototyping, technical implementation, product testing, user feedback, demonstrations, deployment, commercialization support and product strategy.</p></article>
+            <article class="practice-card"><h4>Physical + digital</h4><p>Unity-to-hardware communication, Bluetooth / BLE communication, physical game boards, sensor interaction, assistive technology and connected game systems.</p></article>
+            <article class="practice-card"><h4>Web development</h4><p>Product websites, client websites, event platforms, registration systems, game support websites, interactive maps and WebGL deployments.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-page" aria-label="Next page">
+      <div class="container next-page-grid">
+        <a class="next-page-link" href="leadership.html" style="--next-accent: #fbbf24"><span class="label">Next page</span><strong>Leadership</strong><span>14 interns, event tech and technical lead roles.</span></a>
+        <div class="next-page-contact"><p>Want something edited or designed?</p><a class="text-link" href="index.html#contact">Get in touch <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="footer-brand" href="index.html"><strong>Mus'ab Anas</strong><span>Unity Game Developer</span></a>
+      <nav class="footer-nav" aria-label="Footer navigation"><a href="index.html">Home</a><a href="games.html">Games</a><a href="index.html#services">Capabilities</a><a href="creative.html">Creative</a><a href="leadership.html">Leadership</a><a href="career.html">Career</a><a href="experience.html">Experience details</a><a href="index.html#contact">Contact</a></nav>
+      <span class="footer-copy">© <span id="current-year">2026</span> Mus'ab Anas</span>
+    </div>
+  </footer>
+
+  <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-label">
+    <div class="lightbox-inner"><button class="lightbox-close" type="button" aria-label="Close design viewer">×</button><p id="lightbox-label" class="sr-only">Design viewer</p><button class="lightbox-control lightbox-prev" type="button" aria-label="Previous design">←</button><figure><img data-lightbox-image alt=""><div class="media-placeholder" data-lightbox-placeholder hidden>Design unavailable</div><figcaption><span data-lightbox-counter>1 / 1</span><span data-lightbox-caption></span></figcaption></figure><button class="lightbox-control lightbox-next" type="button" aria-label="Next design">→</button></div>
+  </div>
+
+  <script src="js/projects-data.js"></script>
+  <script src="js/multimedia-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

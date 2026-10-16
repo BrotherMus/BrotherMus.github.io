@@ -1,0 +1,48 @@
+/* Career page — "quest log": violet accent, glowing vertical timeline with nodes. */
+
+.page-career .page-hero::after {
+  content: ''; position: absolute; right: clamp(16px, 8vw, 140px); top: 0; bottom: 0; z-index: -1; width: 2px; pointer-events: none;
+  background: linear-gradient(180deg, transparent, var(--page-accent) 30%, var(--cyan) 70%, transparent);
+  box-shadow: 0 0 18px var(--page-glow);
+}
+.career-areas { margin-top: clamp(40px, 5vw, 64px); }
+.page-career .experience-preview-links .label { color: var(--page-accent-text); }
+.page-career .experience-preview-links a::after { background: linear-gradient(90deg, var(--page-accent), var(--cyan)); }
+
+/* Timeline */
+.log-title { display: flex; align-items: baseline; gap: 14px; font-size: var(--fs-3); margin-bottom: 26px; }
+.log-title small { font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--page-accent-text); }
+.quest-log { --rail: 28px; position: relative; list-style: none; display: grid; gap: 22px; padding-left: calc(var(--rail) + 22px); }
+.quest-log::before { content: ''; position: absolute; left: calc(var(--rail) / 2 - 1px); top: 8px; bottom: 8px; width: 2px; background: linear-gradient(180deg, var(--page-accent), var(--cyan) 60%, color-mix(in srgb, var(--cyan) 20%, transparent)); box-shadow: 0 0 12px var(--page-glow); }
+.quest { position: relative; }
+.quest-node { position: absolute; left: calc(-1 * (var(--rail) / 2 + 22px) - 8px); top: 26px; width: 16px; height: 16px; transform: rotate(45deg); background: var(--bg); border: 2px solid var(--page-accent); }
+.quest.is-current .quest-node { background: var(--page-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--page-accent) 25%, transparent), 0 0 16px var(--page-glow); }
+.quest-card { padding: clamp(20px, 3vw, 28px); background: var(--panel); box-shadow: inset 0 0 0 1px var(--line); transition: box-shadow .25s ease; }
+.quest-card:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--page-accent) 55%, transparent), 0 0 24px color-mix(in srgb, var(--page-accent) 18%, transparent); }
+.quest-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
+.quest-date { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-sm); color: var(--page-accent-text); font-variant-numeric: tabular-nums; }
+.quest-badge { padding: 3px 10px; font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--page-ink); background: var(--page-accent); clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%); }
+.quest-card h3 { margin-top: 12px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(1.375rem, 1.1rem + .9vw, 1.875rem); line-height: 1; }
+.quest-company { margin-top: 6px; color: var(--ink-2); font-size: var(--fs-sm); }
+.quest-summary { margin-top: 14px; color: var(--ink-2); max-width: 70ch; }
+.quest-card .view-more { margin-top: 18px; }
+.quest-card .view-more:hover { border-color: var(--page-accent); color: var(--page-accent-text); box-shadow: 0 0 12px var(--page-glow); }
+.quest-card .experience-details { margin-top: 18px; border-left-color: var(--page-accent); }
+.quest-card .detail-label { color: var(--page-accent-text); }
+.page-career .resume-link { color: var(--page-accent-text); }
+
+.training-log { margin-top: clamp(56px, 7vw, 88px); }
+.quest-log.is-compact .quest-card { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 5fr) minmax(0, 3fr); gap: 6px 28px; align-items: baseline; }
+.quest-log.is-compact .quest-card h3 { margin-top: 0; font-size: 1.25rem; }
+.quest-log.is-compact .quest-node { top: 22px; width: 12px; height: 12px; left: calc(-1 * (var(--rail) / 2 + 22px) - 6px); }
+.quest-log.is-compact .quest-summary { margin-top: 0; }
+
+@media (max-width: 860px) {
+  .quest-log.is-compact .quest-card { grid-template-columns: minmax(0, 1fr); }
+  .quest-card .experience-details { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .quest-log { --rail: 16px; padding-left: calc(var(--rail) + 14px); }
+  .quest-node { left: calc(-1 * (var(--rail) / 2 + 14px) - 8px); }
+  .quest-log.is-compact .quest-node { left: calc(-1 * (var(--rail) / 2 + 14px) - 6px); }
+}

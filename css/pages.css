@@ -1,0 +1,64 @@
+/*
+ * Shared shell for the stand-alone pages: Games, Creative, Leadership and Career.
+ * Each page keeps the site's navy + cyan/magenta system and adds one accent of its own.
+ */
+
+/* ---------- Page accents ---------- */
+.page-games { --page-accent: var(--cyan); --page-accent-text: var(--cyan-text); --page-glow: var(--glow-cyan); --page-ink: var(--cyan-ink); }
+.page-creative { --page-accent: var(--magenta); --page-accent-text: var(--magenta-text); --page-glow: var(--glow-magenta); --page-ink: #1a0420; }
+.page-leadership { --page-accent: #fbbf24; --page-accent-text: #fbbf24; --page-glow: rgba(251, 191, 36, .4); --page-ink: #1c1203; }
+.page-career { --page-accent: #a78bfa; --page-accent-text: #a78bfa; --page-glow: rgba(167, 139, 250, .42); --page-ink: #140b2e; }
+:root[data-theme="light"] .page-leadership { --page-accent-text: #b45309; --page-glow: rgba(251, 191, 36, .35); }
+:root[data-theme="light"] .page-career { --page-accent-text: #6d28d9; --page-glow: rgba(167, 139, 250, .35); }
+
+.scroll-progress span { background: linear-gradient(90deg, var(--page-accent, var(--cyan)), var(--magenta)); }
+
+/* ---------- Page hero ---------- */
+.page-hero { position: relative; overflow: hidden; isolation: isolate; padding-block: clamp(56px, 8vw, 120px) clamp(56px, 7vw, 104px); }
+.page-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: -2;
+  background:
+    radial-gradient(45% 60% at 85% 25%, color-mix(in srgb, var(--page-accent) 18%, transparent), transparent 70%),
+    radial-gradient(35% 50% at 5% 95%, color-mix(in srgb, var(--magenta) 10%, transparent), transparent 70%);
+}
+.page-hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px clamp(32px, 5vw, 88px); align-items: center; }
+.page-kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--page-accent-text); }
+.page-kicker::before { content: ''; width: 8px; height: 8px; background: var(--page-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--page-accent) 25%, transparent), 0 0 12px var(--page-glow); }
+.page-title { margin-top: 18px; font-size: var(--fs-mega); line-height: .9; }
+.page-lead { margin-top: 24px; font-size: var(--fs-lead); line-height: 1.55; color: var(--ink-2); max-width: 54ch; }
+.page-actions { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; margin-top: 32px; }
+.page-actions .btn-outline { --btn-bg: var(--page-accent); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-hero-main > * { animation: page-rise .7s var(--ease) both; }
+  .page-hero-main > :nth-child(2) { animation-delay: .08s; }
+  .page-hero-main > :nth-child(n+3) { animation-delay: .16s; }
+}
+@keyframes page-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* Section headings pick up the page accent */
+.page-shell .section-head h2::before, .page-shell .split-side h2::before { background: linear-gradient(90deg, var(--page-accent), var(--magenta)); box-shadow: 0 0 14px var(--page-glow); }
+.page-shell .text-link { color: var(--page-accent-text); }
+.page-shell .text-link:hover { text-shadow: 0 0 10px var(--page-glow); }
+
+/* ---------- "Next page" panel at the end of every page ---------- */
+.next-page { border-top: 1px solid var(--line); padding-block: clamp(56px, 7vw, 96px); }
+.next-page-grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 24px clamp(24px, 4vw, 64px); align-items: end; }
+.next-page-link {
+  --cut: 18px; position: relative; display: grid; gap: 10px; padding: clamp(24px, 4vw, 40px); padding-right: 96px;
+  text-decoration: none; background: var(--panel);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: background-color .2s ease;
+}
+.next-page-link .label { color: var(--next-accent, var(--page-accent-text)); }
+.next-page-link strong { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: var(--fs-2); line-height: .95; }
+.next-page-link span:last-child { color: var(--ink-2); }
+.next-page-link::after { content: '→'; position: absolute; right: clamp(24px, 4vw, 40px); top: 50%; transform: translateY(-50%); font-family: var(--font-display); font-size: 2.5rem; color: var(--next-accent, var(--page-accent-text)); transition: transform .25s var(--ease); }
+.next-page-link:hover { background: var(--panel-2); }
+.next-page-link:hover::after { transform: translate(6px, -50%); }
+.next-page-contact { display: grid; gap: 14px; justify-items: start; color: var(--ink-2); }
+
+@media (max-width: 860px) {
+  .page-hero-grid, .next-page-grid { grid-template-columns: minmax(0, 1fr); }
+}

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <script>
+    (function () {
+      var theme = 'dark';
+      try {
+        var savedTheme = localStorage.getItem('musab-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') theme = savedTheme;
+      } catch (error) {}
+      document.documentElement.dataset.theme = theme;
+    }());
+  </script>
+  <title>Career | Mus'ab Anas</title>
+  <meta name="description" content="Career, education and training of Mus'ab Anas: Unity Game Developer at Goolee Sdn. Bhd., founder of Musidev Games, and earlier roles at Esolved MSC and Neo Verse.">
+  <meta name="author" content="Mus'ab Anas">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Career | Mus'ab Anas">
+  <meta property="og:description" content="The teams, education and responsibilities behind Mus'ab Anas's development practice.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/career.css">
+</head>
+<body class="page-shell page-career">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Mus'ab Anas home"><span class="brand-symbol" aria-hidden="true"></span><strong>Mus'ab Anas</strong><span>Unity Game Developer</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="games.html">Games</a>
+        <a class="nav-link" href="creative.html">Creative</a>
+        <a class="nav-link" href="leadership.html">Leadership</a>
+        <a class="nav-link" href="career.html" aria-current="page">Career</a>
+        <a class="nav-link nav-contact" href="index.html#contact">Contact</a>
+        <a class="nav-link nav-cv" href="assets/resume/Musab-Anas-Resume.pdf" target="_blank" rel="noreferrer">View CV <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="true"><span aria-hidden="true"></span></button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="career-title">
+      <span id="experience" class="anchor-alias" aria-hidden="true"></span>
+      <span id="resume" class="anchor-alias" aria-hidden="true"></span>
+      <div class="container">
+        <div class="page-hero-main">
+          <p class="page-kicker label">Quest log</p>
+          <h1 id="career-title" class="page-title display">Career</h1>
+          <p class="page-lead">The teams, education and responsibilities behind my development practice.</p>
+          <div class="page-actions">
+            <a class="btn btn-outline" href="assets/resume/Musab-Anas-Resume.pdf" target="_blank" rel="noreferrer">Open CV <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="experience.html">Explore all experience <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="experience-preview career-areas" aria-labelledby="experience-preview-title">
+          <h2 id="experience-preview-title" class="sr-only">Experience areas</h2>
+          <div class="experience-preview-links">
+            <a href="experience.html?id=unity-development"><span class="label">Primary specialization</span><strong>Unity Development</strong><p>Games, gameplay systems and interactive products</p></a>
+            <a href="experience.html?id=multimedia-creative-production"><span class="label">Supporting creative practice</span><strong>Multimedia &amp; Creative Production</strong><p>Video editing, posters, 3D, graphics and presentations</p></a>
+            <a href="experience.html?id=ai-assisted-web-app-development"><span class="label">Development workflow</span><strong>AI-Assisted Web/App Development</strong><p>Web, app prototyping and AI-assisted workflows</p></a>
+            <a href="experience.html?id=leadership-project-delivery"><span class="label">Technical leadership</span><strong>Leadership &amp; Project Delivery</strong><p>Team support, technical direction and delivery</p></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="career" class="section" aria-labelledby="log-title">
+      <div class="container">
+        <h2 id="log-title" class="log-title">Experience <small>Most recent first</small></h2>
+        <ol class="quest-log">
+          <li class="quest is-current">
+            <span class="quest-node" aria-hidden="true"></span>
+            <div class="quest-card">
+              <div class="quest-top"><span class="quest-date">2023 — Present</span><span class="quest-badge">Current</span></div>
+              <h3>Unity Game Developer</h3>
+              <p class="quest-company">Goolee Sdn. Bhd.</p>
+              <p class="quest-summary">Developing Unity games, interactive products and physical-digital experiences.</p>
+              <button class="view-more" type="button" aria-expanded="false" aria-controls="goolee-details">View details <span aria-hidden="true">+</span></button>
+              <div id="goolee-details" class="experience-details" hidden><div><p class="detail-label">Projects / project areas</p><ul><li><strong>AppsGoolee</strong> — Mus’ab’s main Goolee development project, including educational gameplay, progression, player data, cognitive tracking and Steam publication support.</li><li><strong>B-GOOLEE Apps</strong> — inclusive physical-digital interaction with ESP32, Arduino, BLE and sensors.</li><li><strong>iNTELLIGOOLEE</strong> — an in-development system within AppsGoolee for gameplay performance and cognitive profiling.</li><li><strong>AI Assistive Design, Sound Quest and Goolee Slide</strong> — intern-guided project areas.</li><li><strong>Steam Platform and Nikoli Prototype Guidance</strong> — additional Goolee technical-support work represented in the catalogue.</li></ul></div><div><p class="detail-label">Tasks / responsibilities</p><ul><li>Develop AppsGoolee gameplay, interaction, game-state, scoring, step-counting, timing and performance systems.</li><li>Implement quests, levels, challenges, PlayFab player data, statistics, authentication and competitive leaderboards.</li><li>Develop B-GOOLEE physical-digital interaction and support hardware-connected gameplay.</li><li>Prepare PC builds and support publication of Goolee work to Steam.</li><li>Integrate Google Play Games and implement English, Malay and Japanese localization.</li><li>Test, debug, optimize and prepare production builds for demonstrations, exhibitions and events.</li><li>Guide interns and review their work on AI Assistive Design, Sound Quest, Goolee Slide and Nikoli prototype work.</li><li>Contribute to product development and commercialization activities.</li></ul></div></div>
+            </div>
+          </li>
+          <li class="quest is-current">
+            <span class="quest-node" aria-hidden="true"></span>
+            <div class="quest-card">
+              <div class="quest-top"><span class="quest-date">2022 — Present</span><span class="quest-badge">Current</span></div>
+              <h3>Founder / Unity Game Developer</h3>
+              <p class="quest-company">Musidev Games <a class="resume-link" href="https://musidevgames.com/" target="_blank" rel="noreferrer">musidevgames.com ↗</a></p>
+              <p class="quest-summary">Independent game development, client projects and internal products through the studio founded by Mus'ab Anas.</p>
+              <button class="view-more" type="button" aria-expanded="false" aria-controls="musidev-details">View details <span aria-hidden="true">+</span></button>
+              <div id="musidev-details" class="experience-details" hidden><div><p class="detail-label">Projects / project areas</p><ul><li><strong>Lepak / Ceper / Lepak Trivia</strong> — Malaysia-themed casual game platform and mobile MVP work.</li><li><strong>FunOps</strong> — educational mathematics game for interactive learning.</li><li><strong>JOM EBI</strong> — accessible educational reading activities.</li><li><strong>Type Rush / Road Defender 3D</strong> — typing and mobile game development projects.</li><li><strong>Cozy Room, STEP5-S and Kumon Quest</strong> — personal and client project areas.</li></ul></div><div><p class="detail-label">Tasks / responsibilities</p><ul><li>Develop games, interactive digital experiences, gameplay systems, UI and interaction systems.</li><li>Build level and progression systems, integrate PlayFab, and develop web-based supporting systems.</li><li>Prototype game concepts, build client projects, prepare deployments and manage freelance development work.</li><li>Manage requirements, communicate directly with clients and coordinate internal projects.</li><li>Assign tasks and milestones, review technical work and supervise software and game development interns.</li></ul></div></div>
+            </div>
+          </li>
+          <li class="quest">
+            <span class="quest-node" aria-hidden="true"></span>
+            <div class="quest-card">
+              <div class="quest-top"><span class="quest-date">2022 — 2023</span></div>
+              <h3>Unity Game Developer</h3>
+              <p class="quest-company">Esolved MSC Sdn. Bhd.</p>
+              <p class="quest-summary">Metaverse-related game development, gameplay systems, car racing and interactive 3D experiences.</p>
+              <button class="view-more" type="button" aria-expanded="false" aria-controls="esolved-details">View details <span aria-hidden="true">+</span></button>
+              <div id="esolved-details" class="experience-details" hidden><div><p class="detail-label">Projects / project areas</p><ul><li>Metaverse-related game development.</li><li>Car racing gameplay and interactive 3D experiences.</li><li>Blockchain-related and social platform integrations.</li></ul></div><div><p class="detail-label">Tasks / responsibilities</p><ul><li>Develop gameplay systems and car racing mechanics in Unity.</li><li>Support blockchain-related integrations and social platform integrations.</li><li>Contribute to interactive 3D experience development across the project.</li></ul></div></div>
+            </div>
+          </li>
+          <li class="quest">
+            <span class="quest-node" aria-hidden="true"></span>
+            <div class="quest-card">
+              <div class="quest-top"><span class="quest-date">Feb 2022 — Jul 2023</span></div>
+              <h3>Unity Game Developer</h3>
+              <p class="quest-company">Neo Verse Sdn. Bhd.</p>
+              <p class="quest-summary">Contributed to the KeaFarm.io NFT game and supported game development across platforms.</p>
+              <button class="view-more" type="button" aria-expanded="false" aria-controls="neoverse-details">View details <span aria-hidden="true">+</span></button>
+              <div id="neoverse-details" class="experience-details" hidden><div><p class="detail-label">Project</p><ul><li><strong>KeaFarm.io NFT game</strong> — game development across multiple platforms.</li></ul></div><div><p class="detail-label">Tasks / responsibilities</p><ul><li>Create game design documentation and Unity gameplay systems.</li><li>Work with blockchain-related game integration.</li><li>Support game development across multiple platforms.</li><li>Guide interns on game-development tasks.</li></ul></div></div>
+            </div>
+          </li>
+        </ol>
+
+        <div class="training-log">
+          <h2 class="log-title">Education <small>Training log</small></h2>
+          <ol class="quest-log is-compact">
+            <li class="quest"><span class="quest-node" aria-hidden="true"></span><div class="quest-card"><span class="quest-date">2017 — 2021</span><div><h3>Diploma in Computer Science</h3><p class="quest-company">University Malaysia of Computer Science &amp; Engineering</p></div><p class="quest-summary">Game Development</p></div></li>
+            <li class="quest"><span class="quest-node" aria-hidden="true"></span><div class="quest-card"><span class="quest-date">2024</span><div><h3>SKM Level 3</h3><p class="quest-company">Todak Academy</p></div><p class="quest-summary">3D Game Asset Production</p></div></li>
+            <li class="quest"><span class="quest-node" aria-hidden="true"></span><div class="quest-card"><span class="quest-date">2024</span><div><h3>Professional Certificate</h3><p class="quest-company">Todak Academy</p></div><p class="quest-summary">Game Development</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-page" aria-label="Next page">
+      <div class="container next-page-grid">
+        <a class="next-page-link" href="games.html" style="--next-accent: var(--cyan-text)"><span class="label">Next page</span><strong>Games</strong><span>Every project, from AppsGoolee to Lepak.</span></a>
+        <div class="next-page-contact"><p>Hiring a Unity developer?</p><a class="text-link" href="index.html#contact">Get in touch <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="footer-brand" href="index.html"><strong>Mus'ab Anas</strong><span>Unity Game Developer</span></a>
+      <nav class="footer-nav" aria-label="Footer navigation"><a href="index.html">Home</a><a href="games.html">Games</a><a href="index.html#services">Capabilities</a><a href="creative.html">Creative</a><a href="leadership.html">Leadership</a><a href="career.html">Career</a><a href="experience.html">Experience details</a><a href="index.html#contact">Contact</a></nav>
+      <span class="footer-copy">© <span id="current-year">2026</span> Mus'ab Anas</span>
+    </div>
+  </footer>
+
+  <script src="js/projects-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

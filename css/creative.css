@@ -1,0 +1,105 @@
+/* Creative page — "poster wall": magenta, halftone print texture, tilted posters, film-strip video reels. */
+
+/* Halftone dots behind the hero, like a printed poster */
+.page-creative .page-hero::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle, color-mix(in srgb, var(--magenta) 22%, transparent) 1.2px, transparent 1.6px) 0 0 / 14px 14px;
+  -webkit-mask-image: radial-gradient(60% 70% at 80% 40%, #000 10%, transparent 75%);
+  mask-image: radial-gradient(60% 70% at 80% 40%, #000 10%, transparent 75%);
+}
+.creative-title span { display: block; color: transparent; -webkit-text-stroke: 2px var(--magenta); text-shadow: 0 0 34px var(--glow-magenta); }
+:root[data-theme="light"] .creative-title span { -webkit-text-stroke-color: var(--magenta-text); }
+.creative-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; list-style: none; }
+.creative-tags li { padding: 6px 14px; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--page-ink); background: var(--magenta); clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+.creative-tags li:nth-child(even) { background: var(--cyan); color: var(--cyan-ink); }
+
+/* Pinned poster collage */
+.poster-collage { position: relative; height: clamp(340px, 38vw, 500px); margin: 0; }
+.poster-collage img {
+  position: absolute; width: 46%; height: auto; aspect-ratio: 1 / 1.414; object-fit: cover; object-position: top;
+  border: 6px solid #f5f2ff; box-shadow: 0 18px 40px rgba(0, 0, 0, .45), 0 0 34px var(--glow-magenta);
+}
+.poster-collage img:nth-child(1) { left: 2%; top: 10%; transform: rotate(-7deg); }
+.poster-collage img:nth-child(2) { left: 30%; top: 0; z-index: 2; transform: rotate(3deg); }
+.poster-collage img:nth-child(3) { right: 0; top: 16%; width: 34%; aspect-ratio: 1 / 2; transform: rotate(8deg); }
+.poster-collage::after { content: 'Made for MDEC'; position: absolute; left: 8%; bottom: 0; z-index: 3; padding: 8px 16px; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--cyan-ink); background: var(--cyan); transform: rotate(-3deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .poster-collage img { animation: pin-drop .8s var(--ease) both; }
+  .poster-collage img:nth-child(2) { animation-delay: .12s; }
+  .poster-collage img:nth-child(3) { animation-delay: .24s; }
+}
+@keyframes pin-drop { from { opacity: 0; translate: 0 -24px; } to { opacity: 1; translate: 0 0; } }
+
+/* Multimedia skills as stickers */
+.sticker-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; list-style: none; }
+.sticker { position: relative; padding: 26px 22px 24px; background: var(--panel); box-shadow: inset 0 0 0 1px var(--line); transform: rotate(-1.2deg); transition: transform .3s var(--ease), box-shadow .3s ease; }
+.sticker:nth-child(even) { transform: rotate(1.4deg); }
+.sticker::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--magenta); box-shadow: 0 0 14px var(--glow-magenta); }
+.sticker:nth-child(even)::before { background: var(--cyan); box-shadow: 0 0 14px var(--glow-cyan); }
+.sticker:hover { transform: rotate(0) translateY(-4px); box-shadow: inset 0 0 0 1px var(--magenta), 0 0 24px var(--glow-magenta); }
+.sticker h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.25rem; line-height: 1.05; margin-bottom: 10px; }
+.sticker p { color: var(--ink-2); font-size: var(--fs-sm); }
+
+/* Video work as film-strip reels */
+.page-creative .video-block { margin-top: 0; }
+.page-creative .video-head { border-bottom-color: color-mix(in srgb, var(--magenta) 45%, transparent); }
+.page-creative .video-head .label { color: var(--magenta-text); }
+.page-creative .video-group { margin-top: 36px; }
+.page-creative .video-group-title { display: inline-block; margin-bottom: 0; padding: 7px 16px 7px 14px; color: var(--page-ink); background: var(--magenta); clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.page-creative .video-group:nth-child(even) .video-group-title { color: var(--cyan-ink); background: var(--cyan); }
+.page-creative .video-grid {
+  --hole: rgba(255, 255, 255, .16);
+  display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  padding: 30px 14px; background:
+    repeating-linear-gradient(90deg, var(--hole) 0 12px, transparent 12px 24px) left 8px top 9px / 100% 10px no-repeat,
+    repeating-linear-gradient(90deg, var(--hole) 0 12px, transparent 12px 24px) left 8px bottom 9px / 100% 10px no-repeat,
+    #05070f;
+  scrollbar-color: var(--magenta) #05070f;
+}
+.page-creative .video-grid { width: fit-content; max-width: 100%; }
+.page-creative .video-card { flex: 0 0 min(400px, 78vw); scroll-snap-align: start; }
+/* The first reel (the VR Goolee launch) is the featured piece */
+.page-creative .video-group:first-child .video-card { flex-basis: min(720px, 82vw); }
+.page-creative .video-frame { clip-path: none; outline: 1px solid rgba(255, 255, 255, .08); }
+.page-creative .video-card figcaption { color: #c9d3f0; padding: 0 2px; }
+.page-creative .video-card figcaption a { color: #c9d3f0; }
+.page-creative .video-card figcaption strong { color: #fff; }
+.page-creative .video-card figcaption small { color: #8f9cc4; }
+.page-creative .video-play-icon { background: var(--magenta); box-shadow: 0 0 24px var(--glow-magenta); }
+.page-creative .video-play-icon::after { border-left-color: #fff; }
+.page-creative .video-play:hover .video-play-icon, .page-creative .video-play:focus-visible .video-play-icon { background: var(--cyan); }
+.page-creative .video-play:focus-visible { outline-color: var(--magenta); }
+.page-creative #video-more { color: var(--magenta-text); }
+
+/* Design work pinned to the wall */
+.page-creative .design-group { margin-top: 36px; }
+.page-creative .design-grid { display: flex; flex-wrap: wrap; gap: 36px 28px; padding: 28px 8px 8px; }
+.page-creative .design-thumb {
+  width: clamp(150px, 17vw, 210px); overflow: visible; border: 6px solid #f5f2ff; box-shadow: 0 14px 30px rgba(0, 0, 0, .4);
+  transform: rotate(var(--tilt, -2deg)); transition: transform .3s var(--ease), box-shadow .3s ease;
+}
+.page-creative .design-thumb:nth-child(4n+2) { --tilt: 2.5deg; }
+.page-creative .design-thumb:nth-child(4n+3) { --tilt: -1deg; }
+.page-creative .design-thumb:nth-child(4n+4) { --tilt: 3deg; }
+.page-creative .design-thumb::before {
+  content: ''; position: absolute; left: 50%; top: -16px; z-index: 2; width: 74px; height: 24px; transform: translateX(-50%) rotate(-4deg);
+  background: color-mix(in srgb, var(--magenta) 55%, rgba(255, 255, 255, .5)); opacity: .85;
+}
+.page-creative .design-group:nth-child(even) .design-thumb::before { background: color-mix(in srgb, var(--cyan) 55%, rgba(255, 255, 255, .5)); }
+.page-creative .design-thumb:hover, .page-creative .design-thumb:focus-visible { z-index: 3; transform: rotate(0) scale(1.05); border-color: #fff; box-shadow: 0 18px 40px rgba(0, 0, 0, .45), 0 0 28px var(--glow-magenta); }
+.page-creative .design-thumb:focus-visible { outline-color: var(--magenta); outline-offset: 6px; }
+.page-creative .lightbox-control, .page-creative .lightbox-close { border-color: rgba(224, 64, 251, .55); }
+
+.creative-split { margin-top: clamp(72px, 9vw, 120px); }
+
+@media (max-width: 1080px) {
+  .sticker-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .poster-collage { max-width: 520px; width: 100%; }
+}
+@media (max-width: 560px) {
+  .sticker-grid { grid-template-columns: minmax(0, 1fr); }
+  .page-creative .design-grid { justify-content: center; gap: 30px 18px; }
+  .page-creative .design-thumb { width: calc(50% - 12px); }
+}
