@@ -98,3 +98,26 @@ a.level-filter { text-decoration: none; }
 .level-meta small .engine { margin-right: 6px; font-size: .625rem; }
 /* Smaller cartridges: cap the title so two-word names never overflow the frame */
 .level-card .frame-card strong { font-size: clamp(1.25rem, min(calc(70cqi / (var(--chars, 8) * .68)), 14cqi), 3.5rem); }
+
+/* Three featured games: each section is a case study plus a strip of screenshots */
+.game-group .project-index { margin-top: 8px; }
+.game-group-freelance .case { --accent-a: var(--magenta); --accent-b: var(--cyan); --case-text: var(--magenta-text); }
+.game-group-own .case { --accent-a: #fb7185; --accent-b: var(--magenta); --case-text: #fb7185; }
+:root[data-theme="light"] .game-group-own .case { --case-text: #be123c; }
+.shot-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) auto; gap: 10px; align-items: center; margin-top: 28px; text-decoration: none; }
+.shot-strip img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 1px solid var(--line-strong); transition: border-color .2s ease, transform .25s var(--ease); }
+.shot-strip > span { padding-left: 10px; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-sm); color: var(--cyan-text); white-space: nowrap; }
+.shot-strip:hover img { border-color: var(--cyan); }
+.shot-strip:hover img:nth-child(odd) { transform: translateY(-3px); }
+.games-sections > .studio-card { margin-top: 8px; }
+@media (max-width: 560px) {
+  .shot-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shot-strip > span { grid-column: 1 / -1; padding: 4px 0 0; }
+}
+.game-group-bar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--line-strong); }
+.game-group-no { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-3); color: var(--cyan-text); }
+.game-group-bar h2 { font-size: var(--fs-sm); letter-spacing: .1em; text-transform: uppercase; color: var(--cyan-text); }
+.game-group-bar p { color: var(--ink-3); font-size: var(--fs-sm); }
+.game-group-freelance .game-group-no, .game-group-freelance .game-group-bar h2 { color: var(--magenta-text); }
+.game-group-own .game-group-no, .game-group-own .game-group-bar h2 { color: #fb7185; }
+:root[data-theme="light"] .game-group-own .game-group-no, :root[data-theme="light"] .game-group-own .game-group-bar h2 { color: #be123c; }

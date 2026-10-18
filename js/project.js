@@ -130,10 +130,7 @@
 
   function isListed(entry) {
     const display = window.PROJECT_DISPLAY || {};
-    if ((display.studioOnly || []).indexOf(entry.id) !== -1) return false;
-    const parent = entry.parentId ? projects.find(function (other) { return other.id === entry.parentId; }) : null;
-    const type = (parent || entry).projectType;
-    return type === 'professional' || type === 'client' || (display.ownGames || []).indexOf(entry.id) !== -1;
+    return (display.shown || []).indexOf(entry.id) !== -1;
   }
 
   function renderPage(item) {
