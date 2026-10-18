@@ -64,3 +64,37 @@
   .level-grid { grid-template-columns: minmax(0, 1fr); }
   .level-go { opacity: 1; transform: none; }
 }
+
+/* ---------- Groups: full-time job, freelance, own games ---------- */
+a.level-filter { text-decoration: none; }
+.engine-legend { display: flex; align-items: center; gap: 4px; }
+.engine-legend .engine { margin: 0 0 0 4px; }
+.games-sections { display: grid; gap: clamp(64px, 8vw, 112px); }
+.game-group-head { display: grid; gap: 10px; margin-bottom: 28px; padding-left: 18px; border-left: 3px solid var(--cyan); }
+.game-group-head .label { color: var(--cyan-text); }
+.game-group-head h2 { font-size: var(--fs-2); }
+.game-group-head p { color: var(--ink-2); max-width: 60ch; }
+.game-group-head b { margin-left: 6px; font-family: var(--font-display); color: var(--ink); }
+.game-group-freelance .game-group-head { border-left-color: var(--magenta); }
+.game-group-freelance .game-group-head .label { color: var(--magenta-text); }
+.game-group-own .game-group-head { border-left-color: #fb7185; }
+.game-group-own .game-group-head .label { color: #fb7185; }
+:root[data-theme="light"] .game-group-own .game-group-head .label { color: #be123c; }
+.company-title { display: flex; align-items: baseline; gap: 10px; margin: 36px 0 16px; font-size: var(--fs-3); }
+.company-title:first-of-type { margin-top: 0; }
+.company-title span { font-size: var(--fs-sm); color: var(--ink-3); }
+.game-group > .level-grid + .studio-card, .game-group > .studio-card { margin-top: 24px; }
+.studio-card {
+  --cut: 16px; position: relative; display: grid; gap: 8px; max-width: 560px; padding: 24px 80px 24px 26px; text-decoration: none; background: var(--panel);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  box-shadow: inset 0 0 0 1px var(--line); transition: background-color .2s ease;
+}
+.studio-card .label { color: #fb7185; }
+.studio-card strong { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.5rem; line-height: 1; }
+.studio-card span:not(.label):not(.studio-go) { color: var(--ink-2); font-size: var(--fs-sm); }
+.studio-go { position: absolute; right: 26px; top: 50%; transform: translateY(-50%); font-family: var(--font-display); font-size: 2rem; color: #fb7185; transition: transform .25s var(--ease); }
+.studio-card:hover { background: var(--panel-2); }
+.studio-card:hover .studio-go { transform: translate(4px, -54%); }
+.level-meta small .engine { margin-right: 6px; font-size: .625rem; }
+/* Smaller cartridges: cap the title so two-word names never overflow the frame */
+.level-card .frame-card strong { font-size: clamp(1.25rem, min(calc(70cqi / (var(--chars, 8) * .68)), 14cqi), 3.5rem); }

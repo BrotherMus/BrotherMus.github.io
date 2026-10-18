@@ -79,4 +79,15 @@
     }
   ];
 
+  // What the personal site shows. Every record above keeps its project.html?id= page;
+  // the full catalogue (including own games not listed here) lives on https://musidevgames.com/project.
+  window.PROJECT_DISPLAY = {
+    // Homepage case studies, in order.
+    featured: ['appsgoolee', 'funops', 'typerush'],
+    // Own Musidev Games projects shown here; other own projects are left to musidevgames.com.
+    ownGames: ['typerush'],
+    // Own projects that are discontinued or listed only on musidevgames.com.
+    studioOnly: ['lepak', 'ceper', 'lepak-trivia', 'cozy-room', 'road-defender-3d']
+  };
+
 }(window));

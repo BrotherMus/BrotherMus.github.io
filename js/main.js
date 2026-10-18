@@ -3,11 +3,12 @@
 
   // Skip any incomplete records (for example leftover empty objects) so they never render as blank cards.
   const projects = (Array.isArray(window.PROJECTS) ? window.PROJECTS : []).filter(function (project) { return project && project.id && project.title; });
-  const typeLabels = { professional: 'Professional work', personal: 'Original project', client: 'Client project', subproject: 'Part of a project' };
+  const display = window.PROJECT_DISPLAY || {};
+  const typeLabels = { professional: 'Full-time job', client: 'Freelance', personal: 'Own game', subproject: 'Part of a project' };
   const projectIndex = document.querySelector('#project-index');
   const projectCategoryStatus = document.querySelector('#project-category-status');
   const projectShowMore = document.querySelector('#project-show-more');
-  const featuredProjectIds = ['appsgoolee', 'lepak', 'typerush'];
+  const featuredProjectIds = display.featured || ['appsgoolee', 'funops', 'typerush'];
 
   function escapeHtml(value) {
     return String(value || '').replace(/[&<>'"]/g, function (character) {
@@ -15,18 +16,44 @@
     });
   }
 
+  function parentOf(project) {
+    return project.parentId ? projects.find(function (item) { return item.id === project.parentId; }) : null;
+  }
+
+  // Full-time (employer) work, freelance (client) work, or my own games; sub-projects follow their parent.
+  function groupOf(project) {
+    const source = parentOf(project) || project;
+    if (source.projectType === 'professional') return 'full-time';
+    if (source.projectType === 'client') return 'freelance';
+    return 'own';
+  }
+
+  // The personal site shows employer and freelance work plus a few own games; the rest live on musidevgames.com.
+  function isShown(project) {
+    if ((display.studioOnly || []).indexOf(project.id) !== -1) return false;
+    if (groupOf(project) === 'own') return (display.ownGames || []).indexOf(project.id) !== -1;
+    return true;
+  }
+  const shownProjects = projects.filter(isShown);
+
+  function engineOf(project) {
+    const stack = (project.technologies || []).concat(project.platforms || [], [project.category]).join(' ');
+    if (/roblox/i.test(stack)) return 'Roblox';
+    if (/unity/i.test(stack)) return 'Unity';
+    return 'Web';
+  }
+
+  function engineBadge(project) {
+    const engine = engineOf(project);
+    return '<span class="engine engine-' + engine.toLowerCase() + '">' + engine + '</span>';
+  }
+
   function orderedProjects() {
     const featured = featuredProjectIds.map(function (id) {
-      return projects.find(function (project) { return project.id === id; });
+      return shownProjects.find(function (project) { return project.id === id; });
     }).filter(Boolean);
     const featuredIdSet = new Set(featured.map(function (project) { return project.id; }));
-    projects.forEach(function (project) {
-      if (featured.length < 3 && !featuredIdSet.has(project.id)) {
-        featured.push(project);
-        featuredIdSet.add(project.id);
-      }
-    });
-    return featured.concat(projects.filter(function (project) { return !featuredIdSet.has(project.id); }));
+    return featured.concat(shownProjects.filter(function (project) { return !featuredIdSet.has(project.id); }));
   }
 
   // Longest word in a title, so big display titles can scale to fit their frame without breaking mid-word.
@@ -43,7 +70,7 @@
   }
 
   function typeOf(project) {
-    const parent = project.parentId ? projects.find(function (item) { return item.id === project.parentId; }) : null;
+    const parent = parentOf(project);
     return parent ? 'Part of ' + parent.title : (typeLabels[project.projectType] || 'Project');
   }
 
@@ -61,69 +88,77 @@
       .filter(function (fact) { return fact[1]; })
       .map(function (fact) { return '<div><dt>' + fact[0] + '</dt><dd>' + escapeHtml(fact[1]) + '</dd></div>'; }).join('');
     return '<article class="case">' +
-      '<div class="case-info"><p class="case-type">' + escapeHtml(typeOf(project)) + '</p><h3>' + escapeHtml(project.title) + '</h3><p>' + escapeHtml(project.shortDescription) + '</p>' +
+      '<div class="case-info"><p class="case-type">' + escapeHtml(typeOf(project)) + ' ' + engineBadge(project) + '</p><h3>' + escapeHtml(project.title) + '</h3><p>' + escapeHtml(project.shortDescription) + '</p>' +
         '<dl class="case-facts">' + facts + '</dl><a class="text-link" href="' + url + '">Open case study</a></div>' +
       '<a class="case-media" href="' + url + '" tabindex="-1" aria-hidden="true">' + frameMarkup(project) + '</a>' +
     '</article>';
   }
 
-  // Homepage: the three featured case studies; the full list lives on games.html.
+  // Homepage: the three featured case studies; the selected list lives on games.html.
   function renderProjectIndex() {
     if (!projectIndex) return;
     const projectOrder = orderedProjects();
     const featured = projectOrder.slice(0, Math.min(3, projectOrder.length));
     const projectCount = document.querySelector('#project-count');
     if (projectCount) {
-      projectCount.dataset.count = String(projects.length);
-      projectCount.textContent = projectCount.dataset.counted === 'true' ? String(projects.length) : '0';
+      projectCount.dataset.count = String(shownProjects.length);
+      projectCount.textContent = projectCount.dataset.counted === 'true' ? String(shownProjects.length) : '0';
     }
     if (projectCategoryStatus) projectCategoryStatus.textContent = 'Showing ' + featured.length + ' selected projects';
     if (projectShowMore) {
       projectShowMore.hidden = projectOrder.length <= featured.length;
-      projectShowMore.innerHTML = 'View all ' + projectOrder.length + ' games <span aria-hidden="true">→</span>';
+      projectShowMore.innerHTML = 'View all ' + projectOrder.length + ' selected games <span aria-hidden="true">→</span>';
     }
     projectIndex.innerHTML = featured.map(caseMarkup).join('');
     observeReveals();
   }
 
-  // Games page: every project as a "level select" cartridge, filterable by project type.
+  // Games page: "level select" cartridges grouped into full-time, freelance and own games.
   function levelCardMarkup(project, index) {
     const year = cleanYear(project.year);
     return '<li class="level-card"><a href="project.html?id=' + encodeURIComponent(project.id) + '">' + frameMarkup(project) +
       '<span class="level-meta"><span class="level-no">' + String(index + 1).padStart(2, '0') + '</span><strong>' + escapeHtml(project.title) + '</strong><span class="level-go" aria-hidden="true">Open ▸</span>' +
-      '<small>' + escapeHtml(typeOf(project)) + (year ? ' · ' + escapeHtml(year) : '') + '</small></span></a></li>';
+      '<small>' + engineBadge(project) + escapeHtml(typeOf(project)) + (year ? ' · ' + escapeHtml(year) : '') + '</small></span></a></li>';
   }
 
   function renderGames() {
-    const grid = document.querySelector('#games-grid');
-    if (!grid) return;
-    const filters = document.querySelector('#games-filters');
-    const status = document.querySelector('#games-status');
-    const projectOrder = orderedProjects();
-    const types = [{ key: 'all', label: 'All', count: projectOrder.length }].concat(Object.keys(typeLabels).map(function (key) {
-      return { key: key, label: typeLabels[key], count: projectOrder.filter(function (project) { return project.projectType === key; }).length };
-    }).filter(function (type) { return type.count; }));
-    let active = 'all';
-
-    function draw() {
-      const list = active === 'all' ? projectOrder : projectOrder.filter(function (project) { return project.projectType === active; });
-      grid.innerHTML = list.map(levelCardMarkup).join('');
-      if (status) status.textContent = 'Showing ' + list.length + ' of ' + projectOrder.length + ' games';
-      if (filters) filters.querySelectorAll('[data-filter]').forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.filter === active)); });
+    const container = document.querySelector('#games-sections');
+    if (!container) return;
+    const groups = [
+      { key: 'full-time', label: 'Full-time job', title: 'Company work', lead: 'Projects built as an employee, grouped by company.' },
+      { key: 'freelance', label: 'Freelance', title: 'Client projects', lead: 'Client work built through my studio, Musidev Games.' },
+      { key: 'own', label: 'Own games', title: 'My own games', lead: 'A few of my own studio games. The full catalogue is on musidevgames.com.' }
+    ];
+    let number = 0;
+    function grid(list) {
+      return '<ol class="level-grid">' + list.map(function (project) { return levelCardMarkup(project, number++); }).join('') + '</ol>';
     }
 
-    if (filters) {
-      filters.innerHTML = types.map(function (type) {
-        return '<button class="level-filter" type="button" data-filter="' + type.key + '" aria-pressed="false">' + escapeHtml(type.label) + ' <span>' + type.count + '</span></button>';
-      }).join('');
-      filters.addEventListener('click', function (event) {
-        const button = event.target.closest('[data-filter]');
-        if (!button) return;
-        active = button.dataset.filter;
-        draw();
-      });
-    }
-    draw();
+    container.innerHTML = groups.map(function (group) {
+      const list = shownProjects.filter(function (project) { return groupOf(project) === group.key; });
+      if (!list.length && group.key !== 'own') return '';
+      let body;
+      if (group.key === 'full-time') {
+        const companies = [];
+        list.forEach(function (project) {
+          const company = (parentOf(project) || project).company || 'Company';
+          let entry = companies.find(function (item) { return item.name === company; });
+          if (!entry) companies.push(entry = { name: company, items: [] });
+          entry.items.push(project);
+        });
+        body = companies.map(function (company) {
+          return '<h3 class="company-title">' + escapeHtml(company.name) + ' <span>' + company.items.length + '</span></h3>' + grid(company.items);
+        }).join('');
+      } else {
+        body = list.length ? grid(list) : '';
+      }
+      if (group.key === 'own') {
+        body += '<a class="studio-card" href="https://musidevgames.com/project" target="_blank" rel="noreferrer"><span class="label">Musidev Games</span><strong>More of my own games</strong><span>The full game catalogue lives on musidevgames.com.</span><span class="studio-go" aria-hidden="true">↗</span></a>';
+      }
+      return '<section id="' + group.key + '" class="game-group game-group-' + group.key + '" aria-labelledby="' + group.key + '-title">' +
+        '<div class="game-group-head"><span class="label">' + group.label + '</span><h2 id="' + group.key + '-title" class="display">' + group.title + '</h2><p>' + group.lead + (list.length ? ' <b>' + list.length + ' project' + (list.length === 1 ? '' : 's') + '</b>' : '') + '</p></div>' +
+        body + '</section>';
+    }).join('');
   }
 
   // Video work: thumbnails only; the YouTube iframe or local <video> loads after a click.
@@ -423,7 +458,7 @@
     renderGames();
     renderVideoWork();
     renderDesignWork();
-    document.querySelectorAll('[data-project-total]').forEach(function (element) { element.textContent = String(projects.length); });
+    document.querySelectorAll('[data-project-total]').forEach(function (element) { element.textContent = String(shownProjects.length); });
     initTheme();
     initNavigation();
     initMoreButtons();

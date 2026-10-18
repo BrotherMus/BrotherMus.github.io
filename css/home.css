@@ -359,3 +359,11 @@ a.contact-item:hover strong { color: var(--cyan-text); text-shadow: 0 0 14px var
   .contact-item { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
 }
+
+/* ---------- Engine badges (Unity / Roblox) ---------- */
+.engine { display: inline-block; margin-right: 8px; padding: 2px 8px; vertical-align: 1px; font-family: var(--font-display); font-size: .6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; line-height: 1.5; border: 1px solid currentColor; }
+.engine-unity { color: var(--ink-2); }
+.engine-roblox { color: #fb7185; background: rgba(251, 113, 133, .1); }
+:root[data-theme="light"] .engine-roblox { color: #be123c; }
+.engine-web { color: var(--ink-3); }
+.case-type .engine { margin: 0 0 0 6px; }

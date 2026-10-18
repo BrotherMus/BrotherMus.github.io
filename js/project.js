@@ -14,7 +14,7 @@
       ? '--accent-a: var(--magenta); --accent-b: var(--cyan); --accent-text: var(--magenta-text);'
       : '--accent-a: var(--cyan); --accent-b: var(--magenta); --accent-text: var(--cyan-text);';
   }
-  const typeLabels = { professional: 'Professional work', personal: 'Original project', client: 'Client project', subproject: 'Part of a project' };
+  const typeLabels = { professional: 'Full-time job', personal: 'Own game', client: 'Freelance', subproject: 'Part of a project' };
   const params = new URLSearchParams(window.location.search);
   const projectId = params.get('id');
   const project = projects.find(function (item) { return item.id === projectId; });
@@ -128,10 +128,20 @@
     return renderSection('06', 'Inside the project', 'Games inside ' + item.title, '<div class="subprojects">' + cards + '</div>');
   }
 
+  function isListed(entry) {
+    const display = window.PROJECT_DISPLAY || {};
+    if ((display.studioOnly || []).indexOf(entry.id) !== -1) return false;
+    const parent = entry.parentId ? projects.find(function (other) { return other.id === entry.parentId; }) : null;
+    const type = (parent || entry).projectType;
+    return type === 'professional' || type === 'client' || (display.ownGames || []).indexOf(entry.id) !== -1;
+  }
+
   function renderPage(item) {
     const media = item.media || {};
-    const projectIndex = projects.findIndex(function (entry) { return entry.id === item.id; });
-    const next = projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : null;
+    // "Next project" walks only the projects the personal site lists (see PROJECT_DISPLAY in projects-data.js).
+    const listed = projects.filter(function (entry) { return isListed(entry) || entry.id === item.id; });
+    const projectIndex = listed.findIndex(function (entry) { return entry.id === item.id; });
+    const next = listed.length > 1 ? listed[(projectIndex + 1) % listed.length] : null;
     const roleContent = item.role ? '<p class="role-line">' + escapeHtml(item.role) + '</p>' : '';
     const contributionContent = roleContent + renderList(item.contributions, 'contribution-list');
     const featureContent = renderList(item.features, 'feature-list');
