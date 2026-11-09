@@ -102,7 +102,7 @@
   }
 
   function renderLinks(item) {
-    const labels = { itch: 'Play on itch.io ↗', youtube: 'Watch video ↗', website: 'Visit website ↗', steam: 'View on Steam ↗', github: 'View on GitHub ↗', demo: 'View demo ↗' };
+    const labels = { musidev: 'View on musidevgames.com ↗', itch: 'Play on itch.io ↗', youtube: 'Watch video ↗', website: 'Visit website ↗', steam: 'View on Steam ↗', github: 'View on GitHub ↗', demo: 'View demo ↗' };
     const links = item.links || {};
     const markup = Object.keys(labels).map(function (key) {
       const url = safeUrl(links[key]);

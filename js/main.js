@@ -27,7 +27,7 @@
     return 'own';
   }
 
-  // The personal site lists only PROJECT_DISPLAY.shown; everything else lives on musidevgames.com/project.
+  // The personal site lists only PROJECT_DISPLAY.shown; everything else lives on musidevgames.com/games/.
   function isShown(project) {
     return featuredProjectIds.indexOf(project.id) !== -1;
   }
@@ -133,7 +133,7 @@
         '<div class="game-group-bar"><span class="game-group-no">' + String(index + 1).padStart(2, '0') + '</span><h2 id="' + id + '-title">' + groupLabels[group] + '</h2><p>' + escapeHtml(lead) + '</p></div>' +
         '<div class="project-index">' + caseMarkup(project) + '</div>' + shotStrip(project) + '</section>';
     }).join('') +
-      '<a class="studio-card" href="https://musidevgames.com/project" target="_blank" rel="noreferrer"><span class="label">Musidev Games</span><strong>More games and projects</strong><span>Every other game, event mini game and client project lives on musidevgames.com.</span><span class="studio-go" aria-hidden="true">↗</span></a>';
+      '<a class="studio-card" href="https://musidevgames.com/games/" target="_blank" rel="noreferrer"><span class="label">Musidev Games</span><strong>More games and projects</strong><span>Every other game, event mini game and client project lives on musidevgames.com.</span><span class="studio-go" aria-hidden="true">↗</span></a>';
     observeReveals();
   }
 
