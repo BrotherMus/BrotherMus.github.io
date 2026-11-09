@@ -42,7 +42,8 @@
 
   function engineBadge(project) {
     const engine = engineOf(project);
-    return '<span class="engine engine-' + engine.toLowerCase() + '">' + engine + '</span>';
+    return '<span class="engine engine-' + engine.toLowerCase() + '">' + engine + '</span>' +
+      (project.aiBuilt ? '<span class="engine engine-ai" title="Built 100% with Claude (AI), directed by Mus’ab">Built with AI</span>' : '');
   }
 
   function orderedProjects() {
@@ -91,11 +92,10 @@
     '</article>';
   }
 
-  // Homepage: the three featured case studies; the selected list lives on games.html.
+  // Homepage: a case study for every game in PROJECT_DISPLAY.shown.
   function renderProjectIndex() {
     if (!projectIndex) return;
-    const projectOrder = orderedProjects();
-    const featured = projectOrder.slice(0, Math.min(3, projectOrder.length));
+    const featured = orderedProjects();
     const projectCount = document.querySelector('#project-count');
     if (projectCount) {
       projectCount.dataset.count = String(projects.length);
@@ -122,11 +122,15 @@
   function renderGames() {
     const container = document.querySelector('#games-sections');
     if (!container) return;
+    const usedIds = {};
     container.innerHTML = orderedProjects().map(function (project, index) {
       const group = groupOf(project);
       const lead = [project.company, engineOf(project)].filter(Boolean).join(' · ');
-      return '<section id="' + group + '" class="game-group game-group-' + group + '" aria-labelledby="' + group + '-title">' +
-        '<div class="game-group-bar"><span class="game-group-no">' + String(index + 1).padStart(2, '0') + '</span><h2 id="' + group + '-title">' + groupLabels[group] + '</h2><p>' + escapeHtml(lead) + '</p></div>' +
+      // The first game of each kind gets the jump-link id (#full-time, #freelance, #own); later ones use their project id.
+      const id = usedIds[group] ? project.id : group;
+      usedIds[group] = true;
+      return '<section id="' + id + '" class="game-group game-group-' + group + '" aria-labelledby="' + id + '-title">' +
+        '<div class="game-group-bar"><span class="game-group-no">' + String(index + 1).padStart(2, '0') + '</span><h2 id="' + id + '-title">' + groupLabels[group] + '</h2><p>' + escapeHtml(lead) + '</p></div>' +
         '<div class="project-index">' + caseMarkup(project) + '</div>' + shotStrip(project) + '</section>';
     }).join('') +
       '<a class="studio-card" href="https://musidevgames.com/project" target="_blank" rel="noreferrer"><span class="label">Musidev Games</span><strong>More games and projects</strong><span>Every other game, event mini game and client project lives on musidevgames.com.</span><span class="studio-go" aria-hidden="true">↗</span></a>';

@@ -367,3 +367,6 @@ a.contact-item:hover strong { color: var(--cyan-text); text-shadow: 0 0 14px var
 :root[data-theme="light"] .engine-roblox { color: #be123c; }
 .engine-web { color: var(--ink-3); }
 .case-type .engine { margin: 0 0 0 6px; }
+.engine-ai { color: #c4b5fd; background: rgba(167, 139, 250, .12); }
+:root[data-theme="light"] .engine-ai { color: #6d28d9; }
+.case-type .engine + .engine { margin-left: 4px; }
