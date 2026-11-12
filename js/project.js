@@ -41,7 +41,7 @@
   }
 
   function projectUrl(id) {
-    return 'project.html?id=' + encodeURIComponent(id);
+    return 'project?id=' + encodeURIComponent(id);
   }
 
   function mediaPlaceholder(title, label) {
@@ -149,7 +149,7 @@
     const accent = accentFor(item);
     const kicker = parent ? 'Part of ' + parent.title : (typeLabels[item.projectType] || 'Project');
     const platforms = (item.platforms || []).filter(function (entry) { return entry && entry !== '—'; }).join(' · ');
-    let html = '<div class="project-container"><a class="project-back" href="games.html">← Back to games</a>' +
+    let html = '<div class="project-container"><a class="project-back" href="games">← Back to games</a>' +
       '<header class="project-hero" style="' + accentStyle(accent) + '"><div class="project-hero-copy">' +
         '<p class="project-kicker">' + escapeHtml(kicker) + '</p>' +
         '<h1 style="--chars: ' + titleChars(item.title) + '">' + escapeHtml(item.title) + '</h1>' +
@@ -177,7 +177,7 @@
   }
 
   function renderNotFound() {
-    main.innerHTML = '<div class="project-container project-not-found"><a class="project-back" href="games.html">← Back to games</a><h1>We couldn’t find that project.</h1><p>The link may be out of date. Pick a game from the games page instead.</p><a class="btn btn-gradient" href="games.html">See all games</a></div>';
+    main.innerHTML = '<div class="project-container project-not-found"><a class="project-back" href="games">← Back to games</a><h1>We couldn’t find that project.</h1><p>The link may be out of date. Pick a game from the games page instead.</p><a class="btn btn-gradient" href="games">See all games</a></div>';
     main.hidden = false;
   }
 

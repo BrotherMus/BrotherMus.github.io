@@ -81,7 +81,7 @@
   }
 
   function caseMarkup(project) {
-    const url = 'project.html?id=' + encodeURIComponent(project.id);
+    const url = 'project?id=' + encodeURIComponent(project.id);
     const facts = [['Role', project.role], ['Company', project.company], ['Year', cleanYear(project.year)], ['Built with', (project.technologies || []).join(', ')]]
       .filter(function (fact) { return fact[1]; })
       .map(function (fact) { return '<div><dt>' + fact[0] + '</dt><dd>' + escapeHtml(fact[1]) + '</dd></div>'; }).join('');
@@ -113,7 +113,7 @@
   function shotStrip(project) {
     const shots = (project.media && project.media.screenshots || []).slice(0, 4);
     if (!shots.length) return '';
-    const url = 'project.html?id=' + encodeURIComponent(project.id);
+    const url = 'project?id=' + encodeURIComponent(project.id);
     return '<a class="shot-strip" href="' + url + '" aria-label="See ' + escapeHtml(project.title) + ' screenshots">' + shots.map(function (shot) {
       const src = typeof shot === 'string' ? shot : shot.src;
       return '<img src="' + escapeHtml(src) + '" alt="" loading="lazy" onerror="this.remove()">';

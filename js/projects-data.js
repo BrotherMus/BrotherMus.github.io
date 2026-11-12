@@ -2,7 +2,7 @@
   'use strict';
 
   /*
-   * One source of truth for project cards and project.html?id=... pages.
+   * One source of truth for project cards and project?id=... pages.
    * Add a project here, then add its optional media under assets/projects/<id>/.
    * Empty media/link fields are intentionally omitted by the renderer.
    */
@@ -95,7 +95,7 @@
   ];
 
   // What the personal site shows, in this order (also the homepage case studies).
-  // Every record above keeps its project.html?id= page; the full catalogue lives on https://musidevgames.com/games/.
+  // Every record above keeps its project?id= page; the full catalogue lives on https://musidevgames.com/games/.
   window.PROJECT_DISPLAY = {
     shown: ['appsgoolee', 'mr-diy-game', 'organon-track-and-field', 'cozy-room']
   };
