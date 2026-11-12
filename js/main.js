@@ -43,7 +43,7 @@
   function engineBadge(project) {
     const engine = engineOf(project);
     return '<span class="engine engine-' + engine.toLowerCase() + '">' + engine + '</span>' +
-      (project.aiBuilt ? '<span class="engine engine-ai" title="Built 100% with Claude (AI), directed by Mus’ab">Built with AI</span>' : '');
+      (project.aiBuilt ? '<span class="engine engine-ai" title="Developed with Claude (AI), directed by Mus’ab">Built with AI</span>' : '');
   }
 
   function orderedProjects() {
