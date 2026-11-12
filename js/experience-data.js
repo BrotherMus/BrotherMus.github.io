@@ -117,7 +117,7 @@
     { period: '2023 — Present', company: 'Goolee Sdn. Bhd.', title: 'Game Designer / Developer', summary: 'Unity games, interactive products, product-support content and commercialization support.' },
     { period: '2022 — Present', company: 'Musidev Games', title: 'Founder & Technical Lead', summary: 'Game, web and interactive projects from concept through delivery.' },
     { period: '2022 — 2023', company: 'Esolved MSC Sdn. Bhd.', title: 'Unity Game Developer', summary: 'Metaverse, racing-game gameplay and interactive 3D work.' },
-    { period: 'Feb 2022 — Jul 2023', company: 'Neo Verse Sdn. Bhd.', title: 'Unity Game Developer', summary: 'KeaFarm.io gameplay, game-design documentation, blockchain integration and intern guidance.' }
+    { period: '2022', company: 'Neo Verse Sdn. Bhd.', title: 'Unity Game Developer', summary: 'KeaFarm.io gameplay, game-design documentation, blockchain integration and intern guidance.' }
   ];
 
   global.EARLY_TECHNICAL_EXPERIENCE = [
