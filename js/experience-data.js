@@ -7,10 +7,10 @@
       title: 'Unity Development',
       eyebrow: 'Primary specialization',
       summary: 'Building games, interactive products and gameplay systems with Unity, C# and connected services.',
-      description: 'Unity development is Mus’ab’s primary professional focus. His work spans gameplay, player interaction, progression, performance systems and interactive product development for mobile, PC, WebGL and physical-digital experiences.',
+      description: 'Unity development is my primary professional focus. My work spans gameplay, player interaction, progression, performance systems and interactive product development for mobile, PC, WebGL and physical-digital experiences.',
       focus: 'Games, gameplay systems and interactive products',
       context: 'Goolee, Musidev Games, Esolved MSC and Neo Verse',
-      period: '2022 — Present',
+      period: '2022 to present',
       roles: [
         'Unity game and product development at Goolee',
         'Founder and Technical Lead at Musidev Games',
@@ -38,10 +38,10 @@
       title: 'Multimedia & Creative Production',
       eyebrow: 'Supporting creative practice',
       summary: 'Supporting products and commercialization work through 3D, graphic design, presentation and video-production workflows.',
-      description: 'Alongside development work, Mus’ab supports visual communication and production needs through 3D modeling, graphic design, presentation materials and video workflows. This includes Goolee product-support and commercialization materials, plus earlier graphic-design internship experience.',
+      description: 'Alongside development work, I support visual communication and production needs through 3D modeling, graphic design, presentation materials and video workflows. This includes Goolee product-support and commercialization materials, plus earlier graphic-design internship experience.',
       focus: 'Video editing, posters, 3D, graphics and presentations',
       context: 'Goolee and earlier creative experience',
-      period: '2021 — Present',
+      period: '2021 to present',
       roles: [
         'Create graphic assets, presentation materials and product-support content at Goolee.',
         'Prepare technical documents and commercialization materials for MDEC milestones 2 and 3.',
@@ -64,7 +64,7 @@
       title: 'AI-Assisted Web/App Development',
       eyebrow: 'Development workflow',
       summary: 'Using AI-assisted tools to support coding, prototyping, research and web or app development workflows.',
-      description: 'AI-assisted development supports Mus’ab’s broader technical workflow. It is used alongside hands-on implementation to explore ideas, prototype websites and apps, research technical options, and improve development and production workflows.',
+      description: 'AI-assisted development supports my broader technical workflow. I use it alongside hands-on implementation to explore ideas, prototype websites and apps, research technical options, and improve development and production workflows.',
       focus: 'Web, app prototyping and AI-assisted workflows',
       context: 'Product, website and development support work',
       period: 'Current practice',
@@ -87,10 +87,10 @@
       title: 'Leadership & Project Delivery',
       eyebrow: 'Technical leadership',
       summary: 'Guiding technical work, supporting teams and moving interactive projects from requirements to delivery.',
-      description: 'Mus’ab combines development work with practical project delivery: coordinating requirements, mentoring interns, reviewing work, communicating with clients and stakeholders, and preparing projects for demonstrations, handovers and commercialization activity.',
+      description: 'I combine development work with practical project delivery: coordinating requirements, mentoring interns, reviewing work, communicating with clients and stakeholders, and preparing projects for demonstrations, handovers and commercialization activity.',
       focus: 'Team support, technical direction and delivery',
       context: 'Goolee and Musidev Games',
-      period: '2022 — Present',
+      period: '2022 to present',
       roles: [
         'Lead technical work and support team members across multiple projects.',
         'Supervise interns, assign tasks, review deliverables and provide Unity/C# guidance.',
@@ -114,14 +114,14 @@
   ];
 
   global.EXPERIENCE_TIMELINE = [
-    { period: '2023 — Present', company: 'Goolee Sdn. Bhd.', title: 'Game Designer / Developer', summary: 'Unity games, interactive products, product-support content and commercialization support.' },
-    { period: '2022 — Present', company: 'Musidev Games', title: 'Founder & Technical Lead', summary: 'Game, web and interactive projects from concept through delivery.' },
-    { period: '2022 — 2023', company: 'Esolved MSC Sdn. Bhd.', title: 'Unity Game Developer', summary: 'Metaverse, racing-game gameplay and interactive 3D work.' },
+    { period: '2023 to present', company: 'Goolee Sdn. Bhd.', title: 'Game Designer / Developer', summary: 'Unity games, interactive products, product-support content and commercialization support.' },
+    { period: '2022 to present', company: 'Musidev Games', title: 'Founder & Technical Lead', summary: 'Game, web and interactive projects from concept through delivery.' },
+    { period: '2022 to 2023', company: 'Esolved MSC Sdn. Bhd.', title: 'Unity Game Developer', summary: 'Metaverse, racing-game gameplay and interactive 3D work.' },
     { period: '2022', company: 'Neo Verse Sdn. Bhd.', title: 'Unity Game Developer', summary: 'KeaFarm.io gameplay, game-design documentation, blockchain integration and intern guidance.' }
   ];
 
   global.EARLY_TECHNICAL_EXPERIENCE = [
-    { title: 'Graphic Designer Intern', company: 'ZKE Upcycling Design', period: 'Feb 2021 — May 2021', summary: 'Graphics, marketing content and branding support.' },
+    { title: 'Graphic Designer Intern', company: 'ZKE Upcycling Design', period: 'Feb 2021 to May 2021', summary: 'Graphics, marketing content and branding support.' },
     { title: 'IT Technician', company: 'Freelance · IHF Holdings / Juricco Holding Sdn. Bhd.', period: 'Earlier technical experience', summary: 'Hardware and software installation, troubleshooting and repair.' }
   ];
 }(window));

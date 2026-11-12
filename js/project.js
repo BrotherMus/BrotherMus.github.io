@@ -57,12 +57,12 @@
   function coverMarkup(item) {
     const cover = item.media && item.media.cover ? safeUrl(item.media.cover) : '';
     const platforms = (item.platforms || []).filter(function (entry) { return entry && entry !== '—'; }).join(' / ');
-    const img = cover ? '<img src="' + escapeHtml(cover) + '" alt="' + escapeHtml(item.title) + ' cover image" onerror="this.remove()">' : '';
+    const img = cover ? '<img src="' + escapeHtml(cover) + '" alt="' + escapeHtml(item.title) + ' cover image" fetchpriority="high" onerror="this.remove()">' : '';
     return '<figure class="project-cover"><div class="hud-frame"><div class="hud-inner"><div class="frame"><div class="frame-card" aria-hidden="true"><small>' + escapeHtml(item.category || 'Game development') + '</small><strong style="--chars: ' + titleChars(item.title) + '">' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(platforms || 'Interactive project') + '</span></div>' + img + '</div></div></div></figure>';
   }
 
   function displayYear(value) {
-    return String(value || '—').replace(/PRESENT/g, 'present');
+    return value && value !== '—' ? String(value).replace(/PRESENT/g, 'present') : '';
   }
 
   function renderList(items, className) {
@@ -154,7 +154,7 @@
         '<p class="project-kicker">' + escapeHtml(kicker) + '</p>' +
         '<h1 style="--chars: ' + titleChars(item.title) + '">' + escapeHtml(item.title) + '</h1>' +
         '<p class="project-short-description">' + escapeHtml(item.shortDescription) + '</p>' +
-        '<dl class="project-meta"><div><dt>Category</dt><dd>' + escapeHtml(item.category) + '</dd></div><div><dt>Year</dt><dd>' + escapeHtml(displayYear(item.year)) + '</dd></div><div><dt>Company</dt><dd class="project-company">' + escapeHtml(item.company || 'Project details') + '</dd></div>' + (platforms ? '<div><dt>Platforms</dt><dd>' + escapeHtml(platforms) + '</dd></div>' : '') + '</dl>' +
+        '<dl class="project-meta"><div><dt>Category</dt><dd>' + escapeHtml(item.category) + '</dd></div>' + (displayYear(item.year) ? '<div><dt>Year</dt><dd>' + escapeHtml(displayYear(item.year)) + '</dd></div>' : '') + '<div><dt>Company</dt><dd class="project-company">' + escapeHtml(item.company || 'Project details') + '</dd></div>' + (platforms ? '<div><dt>Platforms</dt><dd>' + escapeHtml(platforms) + '</dd></div>' : '') + '</dl>' +
         (parent ? '<p class="parent-project">Part of <a href="' + projectUrl(parent.id) + '">' + escapeHtml(parent.title) + '</a></p>' : '') +
       '</div>' + coverMarkup(item) + '</header><div class="project-content">';
     if (item.description) html += renderSection('01', 'About the project', item.title, '<p>' + escapeHtml(item.description) + '</p>');
@@ -214,7 +214,17 @@
     lightbox.querySelector('.lightbox-next').addEventListener('click', function () { showImage(galleryIndex + 1); });
     closeButton.addEventListener('click', close);
     lightbox.addEventListener('click', function (event) { if (event.target === lightbox) close(); });
-    document.addEventListener('keydown', function (event) { if (lightbox.hidden) return; if (event.key === 'Escape') close(); if (event.key === 'ArrowLeft') showImage(galleryIndex - 1); if (event.key === 'ArrowRight') showImage(galleryIndex + 1); });
+    document.addEventListener('keydown', function (event) { if (lightbox.hidden) return; if (event.key === 'Tab') keepFocusInside(event, lightbox); if (event.key === 'Escape') close(); if (event.key === 'ArrowLeft') showImage(galleryIndex - 1); if (event.key === 'ArrowRight') showImage(galleryIndex + 1); });
+  }
+
+  // The lightbox is a modal dialog: Tab and Shift+Tab cycle through its own buttons only.
+  function keepFocusInside(event, container) {
+    const items = Array.prototype.filter.call(container.querySelectorAll('button, a[href]'), function (el) { return !el.hidden && el.offsetParent !== null; });
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && (document.activeElement === first || !container.contains(document.activeElement))) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && (document.activeElement === last || !container.contains(document.activeElement))) { event.preventDefault(); first.focus(); }
   }
 
   function initTheme() {
@@ -225,7 +235,6 @@
     function applyTheme(theme) {
       const light = theme === 'light';
       root.dataset.theme = light ? 'light' : 'dark';
-      toggle.setAttribute('aria-pressed', String(!light));
       toggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
       if (themeColor) themeColor.setAttribute('content', light ? '#f3f6fc' : '#0b1020');
     }

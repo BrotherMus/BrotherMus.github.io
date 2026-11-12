@@ -38,7 +38,7 @@
 
   function renderOverview() {
     const cards = experiences.map(function (item, index) {
-      return '<a class="experience-card" style="' + accentStyle(areaAccents[item.id]) + '" href="' + experienceUrl(item.id) + '"><span>' + escapeHtml(item.eyebrow) + '</span><h2>' + escapeHtml(item.title) + '</h2><p>' + escapeHtml(item.summary) + '</p><strong>Explore experience <i aria-hidden="true">↗</i></strong></a>';
+      return '<a class="experience-card" style="' + accentStyle(areaAccents[item.id]) + '" href="' + experienceUrl(item.id) + '"><span>' + escapeHtml(item.eyebrow) + '</span><h2>' + escapeHtml(item.title) + '</h2><p>' + escapeHtml(item.summary) + '</p><strong>Read about ' + escapeHtml(item.title) + ' <i aria-hidden="true">→</i></strong></a>';
     }).join('');
     const timelineItems = timeline.map(function (item, index) {
       return '<article class="timeline-item" style="--dot: var(--' + timelineAccents[index % timelineAccents.length] + ')"><span>' + escapeHtml(item.period) + '</span><div><p>' + escapeHtml(item.company) + '</p><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.summary) + '</p></div></article>';
@@ -47,7 +47,7 @@
       return '<article class="earlier-item"><span>' + escapeHtml(item.period) + '</span><h3>' + escapeHtml(item.title) + '</h3><p class="earlier-company">' + escapeHtml(item.company) + '</p><p>' + escapeHtml(item.summary) + '</p></article>';
     }).join('');
 
-    main.innerHTML = '<div class="experience-container"><header class="experience-overview-hero"><h1>More than<br><em>one role.</em></h1><p>Unity development is my primary specialization. These pages show the wider practice behind it: multimedia production, AI-assisted web and app workflows, and technical leadership.</p><a class="btn btn-gradient" href="games.html">View project portfolio <span>↗</span></a></header><section class="experience-card-grid" aria-label="Experience areas">' + cards + '</section><section class="overview-block"><div class="overview-block-heading"><h2>Professional experience</h2><p>A concise view of the teams, roles and technical work behind the portfolio.</p></div><div class="timeline-list">' + timelineItems + '</div></section><section class="overview-block earlier-block"><div class="overview-block-heading"><h2>Earlier technical experience</h2><p>Creative and technical roles that continue to support my multidisciplinary practice.</p></div><div class="earlier-grid">' + earlierItems + '</div></section></div>';
+    main.innerHTML = '<div class="experience-container"><header class="experience-overview-hero"><h1>More than<br><em>one role.</em></h1><p>Unity development is my primary specialization. These pages show the wider practice behind it: multimedia production, AI-assisted web and app workflows, and technical leadership.</p><a class="btn btn-gradient" href="games.html">View project portfolio <span aria-hidden="true">→</span></a></header><section class="experience-card-grid" aria-label="Experience areas">' + cards + '</section><section class="overview-block"><div class="overview-block-heading"><h2>Professional experience</h2><p>A concise view of the teams, roles and technical work behind the portfolio.</p></div><div class="timeline-list">' + timelineItems + '</div></section><section class="overview-block earlier-block"><div class="overview-block-heading"><h2>Earlier technical experience</h2><p>Creative and technical roles that continue to support my multidisciplinary practice.</p></div><div class="earlier-grid">' + earlierItems + '</div></section></div>';
     main.hidden = false;
     document.title = 'Experience | Mus\'ab Anas';
   }
@@ -55,7 +55,7 @@
   function renderProjects(items) {
     if (!Array.isArray(items) || !items.length) return '';
     const cards = items.map(function (item) {
-      return '<a class="related-project" style="' + accentStyle(areaAccents[experienceId]) + '" href="project.html?id=' + encodeURIComponent(item.id) + '"><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.description) + '</p><span>View project ↗</span></a>';
+      return '<a class="related-project" style="' + accentStyle(areaAccents[experienceId]) + '" href="project.html?id=' + encodeURIComponent(item.id) + '"><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.description) + '</p><span>View project <i aria-hidden="true">→</i></span></a>';
     }).join('');
     return '<div class="related-project-grid">' + cards + '</div>';
   }
@@ -94,7 +94,6 @@
     function applyTheme(theme) {
       const light = theme === 'light';
       root.dataset.theme = light ? 'light' : 'dark';
-      toggle.setAttribute('aria-pressed', String(!light));
       toggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
       if (themeColor) themeColor.setAttribute('content', light ? '#f3f6fc' : '#0b1020');
     }

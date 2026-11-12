@@ -100,13 +100,14 @@
     if (projectCount) {
       projectCount.dataset.count = String(projects.length);
       projectCount.textContent = projectCount.dataset.counted === 'true' ? String(projects.length) : '0';
+      // The fact ships hidden so the page never shows a wrong number before this runs.
+      projectCount.closest('div').hidden = false;
     }
     if (projectCategoryStatus) projectCategoryStatus.textContent = 'Showing ' + featured.length + ' selected projects';
     projectIndex.innerHTML = featured.map(caseMarkup).join('');
-    observeReveals();
   }
 
-  // Games page: one project per kind of work, each as a case study with a strip of screenshots.
+  // Games page: the shown projects grouped by kind of work, each as a case study with screenshots.
   const groupLabels = { 'full-time': 'Full-time job', freelance: 'Freelance', own: 'Own game' };
 
   function shotStrip(project) {
@@ -134,7 +135,6 @@
         '<div class="project-index">' + caseMarkup(project) + '</div>' + shotStrip(project) + '</section>';
     }).join('') +
       '<a class="studio-card" href="https://musidevgames.com/games/" target="_blank" rel="noreferrer"><span class="label">Musidev Games</span><strong>More games and projects</strong><span>Every other game, event mini game and client project lives on musidevgames.com.</span><span class="studio-go" aria-hidden="true">↗</span></a>';
-    observeReveals();
   }
 
   // Video work: thumbnails only; the YouTube iframe or local <video> loads after a click.
@@ -163,7 +163,7 @@
     if (!groups.length) return;
 
     gallery.innerHTML = groups.map(function (group) {
-      return '<div class="video-group"><h4 class="video-group-title">' + escapeHtml(group.title) + '</h4><div class="video-grid">' +
+      return '<div class="video-group"><h3 class="video-group-title">' + escapeHtml(group.title) + '</h3><div class="video-grid">' +
         group.videos.filter(hasVideo).map(videoCardMarkup).join('') + '</div></div>';
     }).join('');
 
@@ -212,7 +212,7 @@
     if (!designs.length) return;
 
     gallery.innerHTML = designs.map(function (design) {
-      return '<div class="design-group"><h4 class="video-group-title">' + escapeHtml(design.title) + (design.note ? ' <span>· ' + escapeHtml(design.note) + '</span>' : '') + '</h4><div class="design-grid">' +
+      return '<div class="design-group"><h3 class="video-group-title">' + escapeHtml(design.title) + (design.note ? ' <span>· ' + escapeHtml(design.note) + '</span>' : '') + '</h3><div class="design-grid">' +
         design.pages.map(function (page, pageIndex) {
           const index = pages.push({ src: page.src, alt: page.alt || design.title, caption: design.title + (design.pages.length > 1 ? ' · page ' + (pageIndex + 1) + ' of ' + design.pages.length : '') }) - 1;
           return '<button class="design-thumb" type="button" data-design-index="' + index + '" aria-label="View larger: ' + escapeHtml(pages[index].caption) + '">' +
@@ -254,26 +254,21 @@
     lightbox.addEventListener('click', function (event) { if (event.target === lightbox) close(); });
     document.addEventListener('keydown', function (event) {
       if (lightbox.hidden) return;
+      if (event.key === 'Tab') keepFocusInside(event, lightbox);
       if (event.key === 'Escape') close();
       if (event.key === 'ArrowLeft') show(current - 1);
       if (event.key === 'ArrowRight') show(current + 1);
     });
   }
 
-  function observeReveals() {
-    const elements = document.querySelectorAll('.reveal:not([data-reveal-bound])');
-    if (!('IntersectionObserver' in window)) {
-      elements.forEach(function (element) { element.classList.add('is-visible'); });
-      return;
-    }
-    const observer = new IntersectionObserver(function (entries, currentObserver) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        currentObserver.unobserve(entry.target);
-      });
-    }, { threshold: .12, rootMargin: '0px 0px -35px' });
-    elements.forEach(function (element) { element.dataset.revealBound = 'true'; observer.observe(element); });
+  // The lightbox is a modal dialog: Tab and Shift+Tab cycle through its own buttons only.
+  function keepFocusInside(event, container) {
+    const items = Array.prototype.filter.call(container.querySelectorAll('button, a[href]'), function (el) { return !el.hidden && el.offsetParent !== null; });
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && (document.activeElement === first || !container.contains(document.activeElement))) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && (document.activeElement === last || !container.contains(document.activeElement))) { event.preventDefault(); first.focus(); }
   }
 
   function initTheme() {
@@ -285,7 +280,6 @@
     function applyTheme(theme) {
       const light = theme === 'light';
       root.dataset.theme = light ? 'light' : 'dark';
-      toggle.setAttribute('aria-pressed', String(!light));
       toggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
       if (themeColor) themeColor.setAttribute('content', light ? '#f3f6fc' : '#0b1020');
     }
@@ -345,7 +339,11 @@
       if (nav.classList.contains('is-open') && !nav.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
     });
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && nav.classList.contains('is-open')) closeMenu();
+      if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+        const focusWasInMenu = nav.contains(document.activeElement);
+        closeMenu();
+        if (focusWasInMenu) menuToggle.focus();
+      }
     });
   }
 
@@ -361,27 +359,6 @@
         button.innerHTML = expanded ? 'View details <span aria-hidden="true">+</span>' : 'Hide details <span aria-hidden="true">−</span>';
       });
     });
-  }
-
-  function initPointerEffects() {
-    const art = document.querySelector('.hero-art');
-    const frame = document.querySelector('.portrait-frame');
-    if (!art || !frame || !window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    function resetTilt() {
-      frame.style.setProperty('--tilt-x', '0deg');
-      frame.style.setProperty('--tilt-y', '0deg');
-    }
-
-    art.addEventListener('pointermove', function (event) {
-      if (event.pointerType === 'touch') return;
-      const bounds = frame.getBoundingClientRect();
-      const x = (event.clientX - bounds.left) / bounds.width - .5;
-      const y = (event.clientY - bounds.top) / bounds.height - .5;
-      frame.style.setProperty('--tilt-x', (y * -4).toFixed(2) + 'deg');
-      frame.style.setProperty('--tilt-y', (x * 5).toFixed(2) + 'deg');
-    });
-    art.addEventListener('pointerleave', resetTilt);
   }
 
   function initCountUps() {
@@ -438,9 +415,7 @@
     initTheme();
     initNavigation();
     initMoreButtons();
-    initPointerEffects();
     initCountUps();
-    observeReveals();
     const year = document.querySelector('#current-year');
     if (year) year.textContent = new Date().getFullYear();
   });

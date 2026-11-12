@@ -17,7 +17,7 @@ window.MULTIMEDIA_VIDEOS = {
         {
           src: 'assets/multimedia/video/mara-vr-launch.mp4',
           poster: 'assets/multimedia/video/mara-vr-launch.webp',
-          title: 'VR Goolee – Launch video',
+          title: 'VR Goolee launch video',
           note: 'Owned by Goolee Sdn. Bhd. · Special appreciation: Majlis Amanah Rakyat (MARA)'
         }
       ]
