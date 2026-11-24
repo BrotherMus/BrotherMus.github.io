@@ -193,8 +193,17 @@
     if (credit && data.credit) credit.textContent = data.credit;
     const more = document.querySelector('#video-more');
     if (more && data.moreUrl) {
-      more.href = data.moreUrl;
-      more.innerHTML = escapeHtml(data.moreLabel || 'More videos') + ' <span aria-hidden="true">↗</span>';
+      // Creative page: a callout box with a title, a line of text and a button. Older markup: the element is the link itself.
+      const link = more.querySelector('[data-video-more-link]') || more;
+      link.href = data.moreUrl;
+      link.innerHTML = escapeHtml(data.moreLabel || 'More videos') + ' <span aria-hidden="true">↗</span>';
+      const moreTitle = more.querySelector('[data-video-more-title]');
+      if (moreTitle && data.moreTitle) moreTitle.textContent = data.moreTitle;
+      const moreText = more.querySelector('[data-video-more-text]');
+      if (moreText) {
+        moreText.textContent = data.moreText || '';
+        moreText.hidden = !data.moreText;
+      }
       more.hidden = false;
     }
     block.hidden = false;

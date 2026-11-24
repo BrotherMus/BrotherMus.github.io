@@ -10,7 +10,9 @@
 window.MULTIMEDIA_VIDEOS = {
   credit: 'Edited by Mus’ab for Goolee',
   moreUrl: 'https://www.youtube.com/playlist?list=PLH0OThhNIQqc',
-  moreLabel: 'Watch the video editing playlist on YouTube',
+  moreLabel: 'Watch the playlist',
+  moreTitle: 'All my video editing in one playlist',
+  moreText: 'The videos I edited myself, without AI, collected in one YouTube playlist.',
   groups: [
     {
       id: 'vr-launch',
