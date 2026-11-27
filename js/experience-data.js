@@ -115,6 +115,7 @@
 
   global.EXPERIENCE_TIMELINE = [
     { period: '2023 to present', company: 'Goolee Sdn. Bhd.', title: 'Game Designer / Developer', summary: 'Unity games, interactive products, product-support content and commercialization support.' },
+    { period: '2026 to present', company: 'Double Scape Studios', title: 'Co-Founder & Lead Developer', summary: 'Websites, web apps and games for Malaysian businesses, with Musidev Games as the games unit.' },
     { period: '2022 to present', company: 'Musidev Games', title: 'Founder & Technical Lead', summary: 'Game, web and interactive projects from concept through delivery.' },
     { period: '2022 to 2023', company: 'Esolved MSC Sdn. Bhd.', title: 'Unity Game Developer', summary: 'Metaverse, racing-game gameplay and interactive 3D work.' },
     { period: '2022', company: 'Neo Verse Sdn. Bhd.', title: 'Unity Game Developer', summary: 'KeaFarm.io gameplay, game-design documentation, blockchain integration and intern guidance.' }

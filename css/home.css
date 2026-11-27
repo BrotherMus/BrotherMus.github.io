@@ -83,6 +83,24 @@
 @keyframes scan { 0% { top: -10%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
 
 /* Selected work: case-study blocks */
+/* Studios I founded: Musidev Games and Double Scape Studios, side by side right after the hero */
+.studio-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 64px) clamp(24px, 3vw, 40px); }
+.studio-card { display: grid; grid-template-rows: auto 1fr; gap: 24px; --accent-a: var(--cyan); --accent-b: var(--magenta); --studio-text: var(--cyan-text); }
+.studio-doublescape { --accent-a: var(--magenta); --accent-b: var(--cyan); --studio-text: var(--magenta-text); }
+.studio-media { display: block; text-decoration: none; }
+.studio-media .hud-frame { --cut: 20px; --edge: linear-gradient(135deg, var(--accent-a), rgba(120, 160, 255, .2) 35%, rgba(120, 160, 255, .2) 65%, var(--accent-b)); }
+.studio-media .frame { aspect-ratio: 16 / 9; }
+.studio-media .frame img { transition: transform .6s var(--ease); }
+.studio-media:hover .frame img { transform: scale(1.02); }
+.studio-body { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.studio-kicker { font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--studio-text); }
+.studio-body h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: var(--fs-2); line-height: .95; }
+.studio-text { color: var(--ink-2); max-width: 52ch; }
+.studio-units { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.studio-units li { display: inline-flex; align-items: baseline; gap: 8px; padding: 5px 10px; border: 1px solid var(--line-strong); font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
+.studio-units small { font-family: var(--font-body); font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--ink-3); }
+.studio-body .btn { margin-top: auto; }
+
 .section-work { padding-bottom: clamp(64px, 8vw, 112px); }
 .project-index { display: grid; gap: clamp(72px, 9vw, 140px); }
 .case { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 32px clamp(32px, 5vw, 72px); align-items: start; }
@@ -320,7 +338,7 @@ a.contact-item:hover strong { color: var(--cyan-text); }
   .view-more { grid-row: 1; grid-column: 3; }
 }
 @media (max-width: 860px) {
-  .section-head, .split, .hero-grid, .case, .case:nth-child(even), .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .section-head, .split, .hero-grid, .case, .case:nth-child(even), .contact-grid, .studio-grid { grid-template-columns: minmax(0, 1fr); }
   .split-side, .case-info { position: static; }
   .hero-portrait { justify-self: start; max-width: 380px; }
   .case-media, .case:nth-child(even) .case-media { order: -1; }
@@ -348,6 +366,7 @@ a.contact-item:hover strong { color: var(--cyan-text); }
   .design-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .experience-preview-links a { min-height: 0; }
   .hero-actions .btn { flex: 1 1 100%; }
+  .studio-body .btn { align-self: stretch; }
   .contact-item { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
 }
